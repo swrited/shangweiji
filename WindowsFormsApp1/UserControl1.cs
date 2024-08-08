@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,7 +18,8 @@ namespace WindowsFormsApp1
         public UserControl1()
         {
             InitializeComponent();
-            System.Diagnostics.Debug.WriteLine("打印信息到输出窗口");
+          
+            search_port(serialPort1, comboBox1);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -135,6 +137,8 @@ namespace WindowsFormsApp1
                     serialPort1.BaudRate = Convert.ToInt32(comboBox2.Text);
                     serialPort1.Open();
                     button2.Text = "关闭串口";
+                    label7.Text = "当前连接状态：已连接";
+                    label7.ForeColor = Color.Green;
 
                 }
                 catch
@@ -149,6 +153,8 @@ namespace WindowsFormsApp1
                 {
                     serialPort1.Close();
                     button2.Text = "打开串口";
+                    label7.Text = "当前连接状态：未连接";
+                    label7.ForeColor = Color.Red;
 
                 }
                 catch
@@ -156,6 +162,11 @@ namespace WindowsFormsApp1
 
 
             }
+        }
+
+        private void UserControl1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
